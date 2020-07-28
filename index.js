@@ -11,6 +11,7 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+// question prompt to see more results...
 let question = 'Would you like to see more results y/n?';
 let x = 10;
 let y = 20;
