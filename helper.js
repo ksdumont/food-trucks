@@ -1,5 +1,3 @@
-const APP_LOCALE = 'en-US';
-
 module.exports = {
   getCurrentDay() {
     let dateObject = new Date();
@@ -8,8 +6,9 @@ module.exports = {
   },
   getCurrentTime() {
     let dateObject = new Date();
-    let timestamp = dateObject.toLocaleTimeString(APP_LOCALE);
-    return Number(timestamp.slice(0, -6).replace(':', '.'));
+    let hour = dateObject.getHours();
+    let minutes = dateObject.getMinutes();
+    return Number(`${hour}.${minutes}`);
   },
   displaySortedResults(data) {
     let results = data.map((element) => {

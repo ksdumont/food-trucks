@@ -39,8 +39,9 @@ axios
   .get('https://data.sfgov.org/resource/jjew-r69b.json')
   .then((res) => {
     // filter trucks that are open today
+    let currentDayString = getCurrentDay().toString();
     let openToday = res.data.filter(
-      (item) => item.dayorder === getCurrentDay().toString()
+      (item) => item.dayorder === currentDayString
     );
     // filter trucks that are open at the current search time
     let openNow = openToday.filter(
