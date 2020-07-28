@@ -4,7 +4,6 @@ module.exports = {
     let today = date_object.getDay();
     return today;
   },
-
   getCurrentTime() {
     let date_object = new Date();
     let timestamp = date_object.toLocaleTimeString('en-US');

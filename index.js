@@ -22,7 +22,7 @@ const questionPrompt = (data) => {
       let result = data.slice(x, y);
       if (result.length < 1) {
         rl.close();
-        console.log('There are no more results');
+        console.log('\n', 'Sorry, There are no more results');
         return;
       }
       console.log(result);
