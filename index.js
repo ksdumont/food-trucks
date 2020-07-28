@@ -1,24 +1,64 @@
 const axios = require('axios');
-const helper = require('./helper');
+const {
+  getCurrentDay,
+  getCurrentTime,
+  displaySortedResults,
+} = require('./helper');
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let question = 'Would you like to see more results y/n?';
+let x = 10;
+let y = 20;
+
+const askQuestion = (data) => {
+  rl.question(question, (answer) => {
+    if (answer === 'y') {
+      let result = data.slice(x, y);
+      if (result.length < 1) {
+        rl.close();
+        console.log('There are no more results');
+        return;
+      }
+      console.log(result);
+      x += 10;
+      y += 10;
+      askQuestion(data);
+    } else {
+      rl.close();
+    }
+  });
+};
 
 axios
   .get('https://data.sfgov.org/resource/jjew-r69b.json')
   .then((res) => {
     // filter trucks that are open today
     let openToday = res.data.filter(
-      (item) => item.dayorder === helper.getCurrentDay().toString()
+      (item) => item.dayorder === getCurrentDay().toString()
     );
     // filter trucks that are open at the current search time
     let openNow = openToday.filter(
       (truck) =>
-        helper.getCurrentTime() < Number(truck.endtime.slice(0, -2)) &&
-        helper.getCurrentTime() > Number(truck.starttime.slice(0, -2))
+        getCurrentTime() < Number(truck.endtime.slice(0, -2)) &&
+        getCurrentTime() > Number(truck.starttime.slice(0, -2))
     );
-    const sorted = helper.displaySortedResults(openNow);
+    const sorted = displaySortedResults(openNow);
 
-    console.log('CHECK OUT FOOD TRUCKS THAT ARE OPEN NOW:', '\n', sorted);
+    const firstTenResults = sorted.slice(0, 10);
+
+    console.log(
+      'CHECK OUT THE FOOD TRUCKS THAT ARE OPEN NOW:',
+      '\n',
+      firstTenResults
+    );
+
+    askQuestion(sorted);
   })
-
   .catch((error) => {
     console.log(error);
   });
