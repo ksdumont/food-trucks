@@ -9,12 +9,12 @@ axios
       (item) => item.dayorder === helper.getCurrentDay().toString()
     );
     // filter trucks that are open at the current search time
-    let openHours = openToday.filter(
+    let openNow = openToday.filter(
       (truck) =>
         helper.getCurrentTime() < Number(truck.endtime.slice(0, -2)) &&
         helper.getCurrentTime() > Number(truck.starttime.slice(0, -2))
     );
-    const sorted = helper.displaySortedResults(openHours);
+    const sorted = helper.displaySortedResults(openNow);
 
     console.log('CHECK OUT FOOD TRUCKS THAT ARE OPEN NOW:', '\n', sorted);
   })
