@@ -15,7 +15,7 @@ let question = 'Would you like to see more results y/n?';
 let x = 10;
 let y = 20;
 
-const askQuestion = (data) => {
+const questionPrompt = (data) => {
   rl.question(question, (answer) => {
     if (answer === 'y') {
       let result = data.slice(x, y);
@@ -27,7 +27,7 @@ const askQuestion = (data) => {
       console.log(result);
       x += 10;
       y += 10;
-      askQuestion(data);
+      questionPrompt(data);
     } else {
       rl.close();
     }
@@ -57,7 +57,7 @@ axios
       firstTenResults
     );
 
-    askQuestion(sorted);
+    questionPrompt(sorted);
   })
   .catch((error) => {
     console.log(error);
