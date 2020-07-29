@@ -53,13 +53,16 @@ axios
 
     const firstTenResults = sorted.slice(0, 10);
 
-    console.log(
-      'CHECK OUT THE FOOD TRUCKS THAT ARE OPEN NOW:',
-      '\n',
-      firstTenResults
-    );
-
-    questionPrompt(sorted);
+    if (firstTenResults.length < 1) {
+      console.log('Sorry, there are no food trucks open at this time.');
+    } else {
+      console.log(
+        'CHECK OUT THE FOOD TRUCKS THAT ARE OPEN NOW:',
+        '\n',
+        firstTenResults
+      );
+      questionPrompt(sorted);
+    }
   })
   .catch((error) => {
     console.log(error);

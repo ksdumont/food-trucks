@@ -2,8 +2,7 @@
 
 ### To run locally
 
-1. unzip food-truck
-2. install node and npm
-3. npm install axios
-4. npm install readline
-5. node index.js
+1. unzip food-trucks.zip
+2. cd food-trucks.zip
+3. npm install
+4. node index.js
