@@ -2,7 +2,7 @@
 
 ### To run locally
 
-1. git clone
+1. unzip food-truck
 2. install node and npm
 3. npm install axios
 4. npm install readline
